@@ -10,6 +10,15 @@ $body.css("justify-content", "center");
 //main
 const $main = $('#main');
 
+//built help button
+const helpButton = $('<button class = "help">Resources</button>');
+helpButton.on("click", function() {
+    $funPage.hide();
+    loadResources();
+    $resourcePage.show(2000);
+})
+$main.append(helpButton);
+
 //built fun button
 const funButton = $('<button class = "fun">fun</button>');
 funButton.on("click", function() {
@@ -17,14 +26,6 @@ funButton.on("click", function() {
     $funPage.show(2000);
 })
 $main.append(funButton);
-
-//built help button
-const helpButton = $('<button class = "help">Resources</button>');
-helpButton.on("click", function() {
-    $funPage.hide();
-    $resourcePage.show(2000);
-})
-$main.append(helpButton);
 
 //resource page css settings
 const $resourcePage = $('<div class = "resource-page"></div>');
@@ -135,52 +136,53 @@ resourceContainer = [
         link: "https://power2u.org/"
     },
     {
-        name: "",
-        number: "",
-        summary: "",
-        link: ""
+        name: "National Institute of Mental Health (NIMH)",
+        number: "1-866-615-6464 ",
+        summary: "The National Institute of Mental Health (NIMH) is the lead federal agency for research on mental disorders. NIMH is one of the 27 Institutes and Centers that make up the National Institutes of Health (NIH), the largest biomedical research agency in the world. NIH is part of the U.S. Department of Health and Human Services (HHS).",
+        link: "https://www.nimh.nih.gov/health/statistics/mental-illness"
     },
     {
-        name: "",
-        number: "",
-        summary: "",
-        link: ""
+        name: "World Health Organization",
+        number: "+1 202 974 3000",
+        summary: "Dedicated to the well-being of all people and guided by science, the World Health Organization leads and champions global efforts to give everyone, everywhere an equal chance to live a healthy life. ",
+        link: "https://www.who.int/data/gho/data/themes/mortality-and-global-health-estimates"
     },
     {
-        name: "",
-        number: "",
-        summary: "",
-        link: ""
+        name: "National Alliance on Mental Illness",
+        number: "800-950-6264",
+        summary: "NAMI is the National Alliance on Mental Illness, the nation’s largest grassroots mental health organization dedicated to building better lives for the millions of Americans affected by mental illness.",
+        link: "https://www.nami.org/Home"
     },
     {
-        name: "",
-        number: "",
-        summary: "",
-        link: ""
+        name: "American Association of Suicidology",
+        number: "888-9 PREVENT",
+        summary: "The American Association of Suicidology (AAS) is the world’s largest and nation’s oldest membership-based suicide prevention organization. Founded in 1968 by Edwin S. Shneidman, PhD, AAS promotes the research of suicide and its prevention, public awareness programs, public education and training for professionals and volunteers.",
+        link: "https://suicidology.org/"
     },
     {
-        name: "",
-        number: "",
-        summary: "",
-        link: ""
+        name: "American Foundation for Suicide Prevention",
+        number: "1-888-333-AFSP (2377)",
+        summary: "Established in 1987, the American Foundation for Suicide Prevention (AFSP) is a voluntary health organization that gives those affected by suicide a nationwide community empowered by research, education and advocacy to take action against this leading cause of death.",
+        link: "https://afsp.org/?search=about%20"
     },
     {
-        name: "",
-        number: "",
-        summary: "",
-        link: ""
+        name: "Anxiety & Depression Association of America",
+        number: "1-800-273-TALK (8255)",
+        summary: "ADAA works to prevent, treat, and cure anxiety disorders and depression. ADAA improves the quality of life for those who suffer through evidence-based educational resources, professional practice, and scientific research.",
+        link: "https://adaa.org/"
     },
     {
-        name: "",
-        number: "",
-        summary: "",
-        link: ""
+        name: "Pride Counseling",
+        number: "1-888-843-4564",
+        summary: "Whether you are struggling with mental health issues, your identity, or just need someone to talk to, we believe help should be accessible to everyone. Individuals in the LGBTQ community suffer from mental health issues at a disproportionately high rate, and we wanted to help. By providing online therapy to the LGBTQ community, we make help accessible and accepting of everyone. We provide a platform for people to get the help they need affordably and conveniently. Message your therapist whenever an issue arises. Schedule sessions that work with your schedule.",
+        link: "https://www.pridecounseling.com/"
     },
 ]
 
-for (let i = 0; i <resourceContainer.length; i++) {
+function loadResources(){
+    for (let i = 0; i < resourceContainer.length; i++) {
     let resourceObj = resourceContainer[i];
-const resourceCard = document.createElement("span");
+    const resourceCard = document.createElement("span");
       resourceCard.className = "result-card";
       resourceCard.innerHTML = `
         <h3 class="resource-title">${resourceObj.name}</h3>
@@ -192,4 +194,5 @@ const resourceCard = document.createElement("span");
         <a href=${resourceObj.link} target="_blank">Check them out here.</a>
       `;
       $resourcePage.append(resourceCard);
+    }
 }
