@@ -1,3 +1,8 @@
+body {
+    font-family: 'Playfair Display', serif;
+    font-size: larger;
+}
+
 #main {
     width: 800px;
     opacity: 80%;
@@ -5,10 +10,39 @@
     border-radius: 20px;
     text-align: center;
     padding: 20px;
+}
+
+.joke, .dog {
+    width: 700px;
+    background-color: rgb(192, 136, 247);
+    color: black;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
   }
 
 button {
     margin: 15px;
     padding: 10px;
     border-radius: 15px;
+    font-family: 'Playfair Display', serif;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
+
+button:hover {
+    background-color: aquamarine;
+    color: black;
+  }
+
+.resource-card {
+    width: 600px;
+    background-color: rgb(59, 217, 223);
+    color: black;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+  }
+  

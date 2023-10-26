@@ -13,30 +13,32 @@ const $main = $('#main');
 //header
 const $header = $('#header');
 const $headerAbout = document.createElement("span");
-const $headerContainer = $(`<div id = "header-container"></div`)
     $headerAbout.className = "about-card";
     $headerAbout.innerHTML = `
         <h2 class="quote">"Love's in need of love today." - Stevie Wonder</h2>
         <div class="site-about">
             <em>Welcome!</em>
-            <p>Sometimes life can be a bit much. Overstimulating, emotionally exhausting, and overall just rough. You're not alone in having those feelings! Two ways to assist are: Talking to a non biased professional with the primary goal of helping you; Or finding something to smile and laugh about to remind you that things are okay and that the struggle isn't permanent. If you think getting in touch with a professional is in your best interest, select the resources button. If a smile is what you'd like click the smile button and hangout for as long as you'd like!</p>
+            <p>Sometimes life can be a bit much. Overstimulating, emotionally exhausting, and overall just rough. You're not alone in having those feelings! Two ways to assist are: Talking to a non biased professional with the primary goal of helping you; Or finding something to smile and laugh about to remind you that things are okay and that the struggle isn't permanent. If you think getting in touch with a professional is in your best interest, select the resources button. If a smile is what you'd like, click the smile button and hangout for as long as you'd like!</p>
         </div>
     `;
-// $main.append($headerContainer);
-$headerContainer.append($headerAbout);
 $header.append($headerAbout);
 
+
 //built help button
+let loadResourcesRan = false; 
 const helpButton = $('<button class = "help">Resources</button>');
 helpButton.on("click", function() {
     $funPage.hide();
+    if (loadResourcesRan === false) {
     loadResources();
+    loadResourcesRan = true;
+    };
     $resourcePage.show(2000);
 })
 $main.append(helpButton);
 
 //built fun button
-const funButton = $('<button class = "smile">fun</button>');
+const funButton = $('<button class = "smile"><span class="material-symbols-outlined">sentiment_satisfied </span> </button>');
 funButton.on("click", function() {
     $resourcePage.hide();
     $funPage.show(2000);
@@ -46,6 +48,8 @@ $main.append(funButton);
 //resource page css settings
 const $resourcePage = $('<div class = "resource-page"></div>');
 $resourcePage.css("width", "800px");
+$resourcePage.css("height", "800px");
+$resourcePage.css("overflow", "scroll");
 $resourcePage.css("text-align:", "center");
 $resourcePage.css("border-radius", "20px");
 $resourcePage.css("background-color", "white");
@@ -61,27 +65,30 @@ $resourcePage.hide()
 //fun page css settings
 const $funPage = $('<div class = "fun-page"></div>');
 $funPage.css("width", "800px");
+$funPage.css("height", "800px");
+$funPage.css("overflow", "scroll");
 $funPage.css("text-align:", "center");
 $funPage.css("border-radius", "20px");
 $funPage.css("background-color", "black");
 $funPage.css("opacity", "90%");
 $funPage.css("padding", "20px");
-$funPage.css("color", "purple");
+$funPage.css("color", "teal");
 $funPage.css("font-size", "x-large")
 $funPage.css("justify-content", "center");
 $funPage.css("text-allign", "center");
+
 $main.append($funPage);
 $funPage.hide();
 
 
 //laugh button built
 const $laughButton = $('<button class = "laugh">I\'ve got a joke for you!</button>');
-$funPage.append($laughButton);
+$funPage.prepend($laughButton);
 $laughButton.on("click", addJoke);
 
 //animal button built
 const $animalButton = $('<button class = "animal-pic">A cute puppy!</button>')
-$funPage.append($animalButton);
+$funPage.prepend($animalButton);
 $animalButton.on("click", generateImg);
 
 
@@ -115,17 +122,31 @@ function generateImg() {
         'Accept': 'application/json'
     },
     success: function (data) {
-        let div = $(`<img src= ${data.url}></img>`);
-        div.css("display", "block");
-        div.css("margin-left", "auto");
-        div.css("margin-right", "auto");
-        div.css("width", "50%");
-        div.css("opacity", "100%");
+        let incoming = data.url.split("");
+        if (incoming[incoming.length - 1] === 'g' || "f") {
+        let img = $(`<img class = "dog" src= ${data.url}></img>`);
+        img.css("display", "block");
+        img.css("margin-left", "auto");
+        img.css("margin-right", "auto");
+        img.css("width", "50%");
 
-        $funPage.append(div);  // Outputs a dad joke to the console
+        $funPage.append(img);  // Outputs a dog pic
+
+        } else {
+            let video = $(`
+            <video class = "dog" controls> 
+                <source src=${data.url} type="video/mp4"> 
+            </video>`);
+            video.css("display", "block");
+            video.css("margin-left", "auto");
+            video.css("margin-right", "auto");
+            video.css("width", "50%");
+
+            $funPage.append(video); //outputs a dog video
+        }
     },
     error: function(error) {
-        console.error('Error:', error);
+        console.error('Error:', error); 
     }
 })
 }
@@ -199,7 +220,7 @@ function loadResources(){
     for (let i = 0; i < resourceContainer.length; i++) {
     let resourceObj = resourceContainer[i];
     const resourceCard = document.createElement("span");
-      resourceCard.className = "result-card";
+      resourceCard.className = "resource-card";
       resourceCard.innerHTML = `
         <h3 class="resource-title">${resourceObj.name}</h3>
         <h2 class="resource-phoneNumber">${resourceObj.number}</h2>
