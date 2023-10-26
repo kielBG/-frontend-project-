@@ -10,13 +10,17 @@
     </head>
 
     <body>
-        <audio id="waves" autoplay controls loop>
+        <audio id="waves" autoplay loop>
             <source src="waves.mp3" type="audio/mp3">
         </audio>
+        <script>
+            var audio =document.getElementById("waves");
+            audio.volume = 0.3;
+        </script>
+
         <div id="main">
             <div id="header">
                 <h1>Happiness is your best look</h1>
-                <p>You deserve to smile!</p>
             </div>
         </div>
     </body>
