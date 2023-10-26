@@ -73,9 +73,12 @@ $funPage.css("background-color", "black");
 $funPage.css("opacity", "90%");
 $funPage.css("padding", "20px");
 $funPage.css("color", "teal");
-$funPage.css("font-size", "x-large")
+$funPage.css("font-size", "larger");
 $funPage.css("justify-content", "center");
 $funPage.css("text-allign", "center");
+
+const $funBox = $('<div class = "fun-page"></div>');
+$funPage.append($funBox);
 
 $main.append($funPage);
 $funPage.hide();
@@ -87,7 +90,7 @@ $funPage.prepend($laughButton);
 $laughButton.on("click", addJoke);
 
 //animal button built
-const $animalButton = $('<button class = "animal-pic">A cute puppy!</button>')
+const $animalButton = $('<button class = "animal">A cute puppy!</button>')
 $funPage.prepend($animalButton);
 $animalButton.on("click", generateImg);
 
@@ -104,7 +107,7 @@ $animalButton.on("click", generateImg);
         success: function (data) {
             let div = $(`<div class="joke">${data.joke}</div>`);
             div.css("padding", "15px");
-            $funPage.append(div);  // Outputs a dad joke to the console
+            $funBox.prepend(div);  // Outputs a dad joke to the console
         },
         error: function(error) {
             console.error('Error:', error);
@@ -122,27 +125,30 @@ function generateImg() {
         'Accept': 'application/json'
     },
     success: function (data) {
-        let incoming = data.url.split("");
-        if (incoming[incoming.length - 1] === 'g' || "f") {
-        let img = $(`<img class = "dog" src= ${data.url}></img>`);
+        let incoming = data.url.split(".");
+        console.log(incoming);
+        if (incoming.includes('mp4') === true || incoming.includes('webm') === true) {
+        let video = $(`
+        <video class = "dog" controls> 
+            <source src=${data.url} type="video/mp4"> 
+        </video>`);
+        video.css("display", "block");
+        video.css("margin-left", "auto");
+        video.css("margin-right", "auto");
+        video.css("width", "50%");
+
+         $funBox.prepend(video); //outputs a dog video
+            
+        } else {
+
+        let img = $(`<img class = "dog" src= ${data.url}></img>`);  
         img.css("display", "block");
         img.css("margin-left", "auto");
         img.css("margin-right", "auto");
         img.css("width", "50%");
 
-        $funPage.append(img);  // Outputs a dog pic
+        $funBox.prepend(img);  // Outputs a dog pic
 
-        } else {
-            let video = $(`
-            <video class = "dog" controls> 
-                <source src=${data.url} type="video/mp4"> 
-            </video>`);
-            video.css("display", "block");
-            video.css("margin-left", "auto");
-            video.css("margin-right", "auto");
-            video.css("width", "50%");
-
-            $funPage.append(video); //outputs a dog video
         }
     },
     error: function(error) {

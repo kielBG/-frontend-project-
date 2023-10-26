@@ -1,6 +1,7 @@
 body {
     font-family: 'Playfair Display', serif;
     font-size: larger;
+    cursor: url("seashell.png"), auto;
 }
 
 #main {
@@ -20,6 +21,7 @@ body {
     padding: 20px;
     margin: 10px;
     display: inline-block;
+    font-size: large;
   }
 
 button {
@@ -28,7 +30,22 @@ button {
     border-radius: 15px;
     font-family: 'Playfair Display', serif;
     transition-duration: 0.4s;
-    cursor: pointer;
+}
+
+button.animal {
+  cursor: url("dog.png"), auto;
+}
+
+button.help {
+  cursor: url("semicolon.png"), auto;
+}
+
+button.laugh {
+  cursor: url("laugh.png"), auto;
+}
+
+button.smile {
+  cursor: url("happy.png"), auto;
 }
 
 button:hover {
