@@ -6,3 +6,9 @@
     text-align: center;
     padding: 20px;
   }
+
+button {
+    margin: 15px;
+    padding: 10px;
+    border-radius: 15px;
+}

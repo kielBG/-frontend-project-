@@ -10,6 +10,22 @@ $body.css("justify-content", "center");
 //main
 const $main = $('#main');
 
+//header
+const $header = $('#header');
+const $headerAbout = document.createElement("span");
+const $headerContainer = $(`<div id = "header-container"></div`)
+    $headerAbout.className = "about-card";
+    $headerAbout.innerHTML = `
+        <h2 class="quote">"Love's in need of love today." - Stevie Wonder</h2>
+        <div class="site-about">
+            <em>Welcome!</em>
+            <p>Sometimes life can be a bit much. Overstimulating, emotionally exhausting, and overall just rough. You're not alone in having those feelings! Two ways to assist are: Talking to a non biased professional with the primary goal of helping you; Or finding something to smile and laugh about to remind you that things are okay and that the struggle isn't permanent. If you think getting in touch with a professional is in your best interest, select the resources button. If a smile is what you'd like click the smile button and hangout for as long as you'd like!</p>
+        </div>
+    `;
+// $main.append($headerContainer);
+$headerContainer.append($headerAbout);
+$header.append($headerAbout);
+
 //built help button
 const helpButton = $('<button class = "help">Resources</button>');
 helpButton.on("click", function() {
@@ -20,7 +36,7 @@ helpButton.on("click", function() {
 $main.append(helpButton);
 
 //built fun button
-const funButton = $('<button class = "fun">fun</button>');
+const funButton = $('<button class = "smile">fun</button>');
 funButton.on("click", function() {
     $resourcePage.hide();
     $funPage.show(2000);
